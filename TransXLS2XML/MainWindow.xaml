@@ -1,0 +1,148 @@
+﻿<Window x:Class="TransXLS2XML.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:TransXLS2XML"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="450" Width="800">
+    <Grid Background="LightGray">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="100*"/>
+            <ColumnDefinition Width="2*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="10*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="15*"/>
+        </Grid.RowDefinitions>
+
+        <TabControl Background="LightGray" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Grid.ColumnSpan="4">
+
+            <TabItem Background="LightGray" Header="Исходный файл">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="18*"/>
+                        <ColumnDefinition Width="90*"/>
+                        <ColumnDefinition Width="20*"/>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="165*"/>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="183*"/>
+                        <ColumnDefinition Width="37*"/>
+                        <ColumnDefinition Width="183*"/>
+                        <ColumnDefinition Width="18*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="10*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="25*"/>
+                        <RowDefinition Height="38*"/>
+                        <RowDefinition Height="5*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="исходный XLS :" Grid.Column="1" Grid.Row="5" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Grid.ColumnSpan="2"/>
+                    <TextBox x:Name="txtFileName" Grid.Column="4" Grid.Row="5" Text="file name" TextWrapping="Wrap" AutomationProperties.Name="txtFileName" VerticalContentAlignment="Center" HorizontalAlignment="Stretch" HorizontalContentAlignment="Center"/>
+                    <Button x:Name="btnOpenNewXLSFile" Content="Открыть XLS файл" Grid.Column="6" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Padding="7,7,7,7" Click="btnOpenNewXLSFile_Click"/>
+                    <Button x:Name="btnDoIt" Content="Сформировать новый XML" Grid.Column="8" HorizontalAlignment="Center" Grid.Row="5" VerticalAlignment="Center" Padding="7,7,7,7" IsEnabled="False" Click="btnDoIt_Click"/>
+                    <!--
+                    <DockPanel Height="100" LastChildFill="False" Width="100" Grid.Column="2" Grid.Row="2" Grid.ColumnSpan="7" HorizontalAlignment="Left" VerticalAlignment="Stretch">
+                        -->
+                    <Label Content="Тип документа" VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Column="3" Grid.Row="3" Grid.ColumnSpan="2" VerticalContentAlignment="Center" HorizontalContentAlignment="Right"/>
+                    <!--
+                        <Rectangle Fill="#FFF4F4F5"  Stroke="Black" VerticalAlignment="Stretch" HorizontalAlignment="Center" Width="20"/>
+                            -->
+                    <ComboBox x:Name="cmbDocumentType" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="6" Grid.Row="3" Grid.ColumnSpan="3" VerticalContentAlignment="Center">
+
+                    </ComboBox>
+                    <!--
+                    </DockPanel>
+                    -->
+                </Grid>
+            </TabItem>
+            <TabItem Background="LightGray" Header="Настройки" Margin="-2,0,-2,2" Height="20" VerticalAlignment="Bottom">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="24*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="4*"/>
+                        <ColumnDefinition Width="24*"/>
+                        <ColumnDefinition Width="2*"/>
+                        <ColumnDefinition Width="32*"/>
+                        <ColumnDefinition Width="4*"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="6*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="3*"/>
+                        <RowDefinition Height="16*"/>
+                        <RowDefinition Height="6*"/>
+                    </Grid.RowDefinitions>
+                    <Label Content="ЕДРПОУ:" Grid.Column="1" HorizontalAlignment="Stretch"  Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Код документа:" Grid.Column="1" HorizontalAlignment="Stretch"  Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Подтип документа:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Отчётный месяц:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Код отчётн.периода:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Отчётный год:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="D_FILL:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="13" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="HSTI:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="1" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="HTIN:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="3" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="HNAME:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="5" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="HBOSS:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="7" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="HFILL:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="9" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfTIN" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="1" Text="TextBox" TextWrapping="Wrap" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_DOC" Grid.Column="3" Grid.Row="3" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_DOC_SUB" Grid.Column="3" Grid.Row="5" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfPERIOD_MONTH" Grid.Column="3" Grid.Row="7" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfPERIOD_YEAR" Grid.Column="3" Grid.Row="11" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfD_FILL" Grid.Column="3" Grid.Row="13" Text="TextBox" TextWrapping="Wrap" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfHSTI" Grid.Column="7" Text="TextBox" TextWrapping="Wrap" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfHTIN" Grid.Column="7" Text="TextBox" TextWrapping="Wrap" Grid.Row="3" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfHNAME" Grid.Column="7" Text="TextBox" TextWrapping="Wrap" Grid.Row="5" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfHBOS" Grid.Column="7" Text="TextBox" TextWrapping="Wrap" Grid.Row="7" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfHFILL" Grid.Column="7" Text="TextBox" TextWrapping="Wrap" Grid.Row="9" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <ComboBox x:Name="cbPERIOD_TYPE" Grid.Column="3" HorizontalAlignment="Stretch"  Grid.Row="9" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__DOC__CNT:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="11" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_DOC_CNT"  Grid.Column="7" HorizontalAlignment="Stretch" Grid.Row="11" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__DOC__STAN:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="13" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__RAJ:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="15" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__DOC__VER:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="15" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__REG:" Grid.Column="1" HorizontalAlignment="Stretch" Grid.Row="17" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="C__STI__ORIG:" Grid.Column="5" HorizontalAlignment="Stretch" Grid.Row="17" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <Label Content="Label:" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="19" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_DOC_STAN" Grid.Column="7" HorizontalAlignment="Stretch" Grid.Row="13" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_RAJ" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="15" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_DOC_VER" Grid.Column="7" HorizontalAlignment="Stretch" Grid.Row="15" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_REG" Grid.Column="3" HorizontalAlignment="Stretch" Grid.Row="17" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                    <TextBox x:Name="tfC_STI_ORIG" Grid.Column="7" HorizontalAlignment="Stretch" Grid.Row="17" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Stretch" VerticalContentAlignment="Center"/>
+                </Grid>
+            </TabItem>
+
+        </TabControl>
+    </Grid>
+</Window>

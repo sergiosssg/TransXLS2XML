@@ -1,0 +1,72 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="TransXLS2XML.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TIN" Type="System.String" Scope="Application">
+      <Value Profile="(Default)">05747991</Value>
+    </Setting>
+    <Setting Name="C_DOC" Type="System.String" Scope="User">
+      <Value Profile="(Default)">J13</Value>
+    </Setting>
+    <Setting Name="C_DOC_SUB" Type="System.String" Scope="User">
+      <Value Profile="(Default)">120</Value>
+    </Setting>
+    <Setting Name="C_DOC_VER" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2</Value>
+    </Setting>
+    <Setting Name="C_DOC_TYPE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="C_DOC_CNT" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="C_REG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">18</Value>
+    </Setting>
+    <Setting Name="C_RAJ" Type="System.String" Scope="User">
+      <Value Profile="(Default)">19</Value>
+    </Setting>
+    <Setting Name="PERIOD_MONTH" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PERIOD_TYPE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="PERIOD_YEAR" Type="System.String" Scope="User">
+      <Value Profile="(Default)">2020</Value>
+    </Setting>
+    <Setting Name="C_STI_ORIG" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1819</Value>
+    </Setting>
+    <Setting Name="C_DOC_STAN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="LINKED_DOCS" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="D_FILL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">09012020</Value>
+    </Setting>
+    <Setting Name="SOFTWARE" Type="System.String" Scope="User">
+      <Value Profile="(Default)">MEDOC</Value>
+    </Setting>
+    <Setting Name="HSTI" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ГОЛОВНЕ УПРАВЛІННЯ ДПС У СУМСЬКІЙ ОБЛАСТІ, УПРАВЛІННЯ У М.СУМАХ  (М. СУМИ)</Value>
+    </Setting>
+    <Setting Name="HTIN" Type="System.String" Scope="User">
+      <Value Profile="(Default)">05747991</Value>
+    </Setting>
+    <Setting Name="HNAME" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Акціонерне товариство "Сумське машинобудівне науково-виробниче об'єднання"</Value>
+    </Setting>
+    <Setting Name="HBOS" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Лук`яненко Володимир Матвійович</Value>
+    </Setting>
+    <Setting Name="HFILL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">09012020</Value>
+    </Setting>
+    <Setting Name="DOCNUMBER" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+  </Settings>
+</SettingsFile>
