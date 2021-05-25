@@ -29,7 +29,7 @@ namespace TransXLS2XML
         private string pathToPropertiesOfDECLAR = "C:\\SSG\\PROJECTs\\Translate-XLS-2-XML\\config.ini";
 
         private DialogWnd dialogWnd;
-        private ConvertorPreparedStructure convertorPrepared;
+        private ConvertorPreparedInfo convertorPrepared;
 
 
         private Dictionary<EnumPeriodOfKod, string> dictionaryPeriodOfKods;
@@ -37,7 +37,7 @@ namespace TransXLS2XML
 
         private string xlsFileName;
 
-        private PreparedSettings4Convertation _preparedSettings4Convertation;
+        private PreparedSettings4ConvertationStruct _preparedSettings4Convertation;
 
         //EnumPeriodOfKod
 
@@ -45,6 +45,8 @@ namespace TransXLS2XML
         {
             InitializeComponent();
 
+
+            // later I'd modify this code, so that strings would be connected with embedded types ...
             dictionaryPeriodOfKods = new Dictionary<EnumPeriodOfKod, string> { [EnumPeriodOfKod.month] = "месяц", [EnumPeriodOfKod.quartal] = "квартал", [EnumPeriodOfKod.semiyear] = "пол года", [EnumPeriodOfKod.nine_months] = "9 месяцев", [EnumPeriodOfKod.year] = "год" };
             dictionaryDocumentType = new Dictionary<EnumNumberOfSchemaReport, string> { [EnumNumberOfSchemaReport.J0147105] = "J0147105", [EnumNumberOfSchemaReport.J1312002] = "J1312002" };
 
@@ -53,7 +55,7 @@ namespace TransXLS2XML
 
             var hashtable = new Hashtable();
 
-            convertorPrepared = new ConvertorPreparedStructure(pathToPropertiesOfDECLAR);
+            convertorPrepared = new ConvertorPreparedInfo(pathToPropertiesOfDECLAR);
 
             var propertyContext = Properties.Settings.Default;
 
@@ -148,7 +150,7 @@ namespace TransXLS2XML
             _preparedSettings4Convertation.HSTI = tfHSTI.Text;
             _preparedSettings4Convertation.HTIN = tfHTIN.Text;
             _preparedSettings4Convertation.HNAME = tfHNAME.Text;
-            _preparedSettings4Convertation.HBOSS = tfHBOS.Text;
+            _preparedSettings4Convertation.HBOS = tfHBOS.Text;
             _preparedSettings4Convertation.HFILL = tfHFILL.Text;
             _preparedSettings4Convertation.C_DOC_STAN = tfC_DOC_CNT.Text;
             _preparedSettings4Convertation.C_DOC_VER = tfC_DOC_VER.Text;
@@ -222,5 +224,15 @@ namespace TransXLS2XML
             bool permitAction = false;
             permitAction = fillConvertorPreparedStructure();
         }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            Console.WriteLine("This window closing, but haven't closed yet...");
+        }
+/*
+        private void Window_Unloaded(object sender, RoutedEventArgs e)
+        {
+            Console.WriteLine("This window uloaded.");
+        }*/
     }
 }

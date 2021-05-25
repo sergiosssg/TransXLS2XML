@@ -22,7 +22,7 @@ namespace TransXLS2XML
         BEFORE = 0x80, AFTER = 0xC0
     }
 
-    public struct PreparedSettings4Convertation
+    public struct PreparedSettings4ConvertationStruct
     {
         public EnumNumberOfSchemaReport DOCNUMBER;
         public string TIN;
@@ -44,13 +44,15 @@ namespace TransXLS2XML
         public string HSTI;
         public string HTIN;
         public string HNAME;
-        public string HBOSS;
+        public string HBOS;
         public string HFILL;
     }
 
 
-    public class ConvertorPreparedStructure
+    public class ConvertorPreparedInfo
     {
+        private const string sDOCNUMBER_DEFAULT_NUMBER = "J0147105";
+
         private Dictionary<string, string> _parametersValues;
         private Dictionary<string, string> _parametersNewValues; // after changing value by user in program proper key gain this new value, so ...
         private Dictionary<string, bool> _parametersChangedKeyIsName;
@@ -59,13 +61,13 @@ namespace TransXLS2XML
         private Dictionary<ConvertorPreparedLocationParamsOfBodySection, ISet<string>> _parametersTypesBodySection;
         private string _sPathToIni;
         private INIFiles _iniFile;
-        private  static string[] _propertiesOrder; // order which keys should be keep  to follow each after other
+        //private  static string[] _propertiesOrder; // order which keys should be keep  to follow each after other
         private string _sDOCNUMBER;
         private string _sNewDOCNUMBER;
         private bool _DOCNUMBERchanged;
 
 
-        public ConvertorPreparedStructure()
+        public ConvertorPreparedInfo()
         {
             _DOCNUMBERchanged = false;
             _sNewDOCNUMBER = "";
@@ -82,19 +84,19 @@ namespace TransXLS2XML
             _parametersTypesBodySection.Add(ConvertorPreparedLocationParamsOfBodySection.AFTER, new HashSet<string>());
         }
 
-        public ConvertorPreparedStructure(string sPathToINIfile) : this()
+        public ConvertorPreparedInfo(string sPathToINIfile) : this()
         {
             this._sPathToIni = sPathToINIfile;
             _iniFile = new INIFiles(this._sPathToIni);
         }
 
-        public ConvertorPreparedStructure(string[] sArrayOfKeys) : this()
+        public ConvertorPreparedInfo(string[] sArrayOfKeys) : this()
         {
             InitializerByDefaultKeysForSectionBodyOrHead(sArrayOfKeys);
             InitializerByDefaultKeysForSectionBodyOrHeadToSeparateSet();
         }
 
-        public ConvertorPreparedStructure(string sPathToINIfile, string[] sArrayOfKeys) : this()
+        public ConvertorPreparedInfo(string sPathToINIfile, string[] sArrayOfKeys) : this()
         {
             this._sPathToIni = sPathToINIfile;
             _iniFile = new INIFiles(this._sPathToIni);
@@ -107,11 +109,11 @@ namespace TransXLS2XML
         {
             if (InitializerByDefaultKeysForSectionBodyOrHead(arrayOfKeys) == null)
             {
-                arrayOfKeys = _propertiesOrder;
+                arrayOfKeys = InitializerByDefaultKeysForSectionBodyOrHead();
             }
             else
             {
-                _propertiesOrder = arrayOfKeys;
+                arrayOfKeys = InitializerByDefaultKeysForSectionBodyOrHead();
             }
 
             InitializerByDefaultKeysForSectionBodyOrHeadToSeparateSet();
@@ -204,7 +206,7 @@ namespace TransXLS2XML
         // returns keys with its prefix string with dot split prefix and key
         public string[] getFullKeysNames()
         {
-            return _propertiesOrder;
+            return InitializerByDefaultKeysForSectionBodyOrHead();
         }
 
 
@@ -232,14 +234,15 @@ namespace TransXLS2XML
         {
             bool resultOfFunction = false;
 
-            if(sFileName != null && sFileName.Length != 0)
+            if (sFileName != null && sFileName.Length != 0)
             {
                 this._sPathToIni = sFileName;
                 _iniFile = new INIFiles(this._sPathToIni);
             }
 
             var hashtable = new Hashtable();
-            var arrayKeyStrings = _propertiesOrder;
+            //instead of using inner class variable  I use InitializerByDefaultKeysForSectionBodyOrHead()
+            var arrayKeyStrings = InitializerByDefaultKeysForSectionBodyOrHead();
             int i = 0;
 
             foreach (string s in arrayKeyStrings)
@@ -257,11 +260,11 @@ namespace TransXLS2XML
                 }
                 else { resultOfFunction = false; }
             }
-            string sSectionOfDOCNUMBER = _propertiesOrder[0].Substring(0, _propertiesOrder[0].IndexOf('.'));
+            string sSectionOfDOCNUMBER = arrayKeyStrings[0].Substring(0, arrayKeyStrings[0].IndexOf('.'));
 
-            if (_iniFile.KeyExists(sSectionOfDOCNUMBER, _propertiesOrder[0])) // _propertiesOrder[0] == "TYPE.DOCNUMBER"
+            if (_iniFile.KeyExists(sSectionOfDOCNUMBER, arrayKeyStrings[0])) // _propertiesOrder[0] == "TYPE.DOCNUMBER"
             {
-                _sDOCNUMBER = _iniFile.ReadINI(sSectionOfDOCNUMBER, _propertiesOrder[0]);
+                _sDOCNUMBER = _iniFile.ReadINI(sSectionOfDOCNUMBER, arrayKeyStrings[0]);
                 resultOfFunction = resultOfFunction & true;
             }
             else { resultOfFunction = false; }
@@ -339,66 +342,126 @@ namespace TransXLS2XML
         }
 
 
-        public void loadPropertiesFromStructure(PreparedSettings4Convertation preparedSettings4Convertation)
+        public void loadPropertiesFromStructure(PreparedSettings4ConvertationStruct preparedSettings4Convertation)
         {
-
-            //preparedSettings4Convertation.DOCNUMBER;
-            string strDOCNUMBER;
+            //string strDOCNUMBER;
             switch (preparedSettings4Convertation.DOCNUMBER){
                 case EnumNumberOfSchemaReport.J0147105:
-                    strDOCNUMBER = "J0147105";
+                    DOCNUMBER = EnumNumberOfSchemaReport.J0147105.ToString();
+                    //strDOCNUMBER = "J0147105";
                     break;
                 case EnumNumberOfSchemaReport.J1312002:
-                    strDOCNUMBER = "J1312002";
+                    DOCNUMBER = EnumNumberOfSchemaReport.J1312002.ToString();
+                    //strDOCNUMBER = "J1312002";
                     break;
             }
+            //_DOCNUMBERchanged = true;
 
-            //preparedSettings4Convertation.C_DOC;
-            //preparedSettings4Convertation.C_DOC_CNT;
-            //preparedSettings4Convertation.C_DOC_STAN;
-            //preparedSettings4Convertation.C_DOC_SUB;
-            //preparedSettings4Convertation.C_DOC_TYPE;
-            //preparedSettings4Convertation.C_DOC_VER;
-            //preparedSettings4Convertation.C_RAJ;
-            //preparedSettings4Convertation.C_REG;
-            //preparedSettings4Convertation.C_STI_ORIG;
-            //preparedSettings4Convertation.D_FILL;
-            //preparedSettings4Convertation.HBOSS;
-            //preparedSettings4Convertation.HFILL;
-            //preparedSettings4Convertation.HNAME;
-            //preparedSettings4Convertation.HSTI;
-            //preparedSettings4Convertation.HTIN;
-            //preparedSettings4Convertation.LINKED_DOCS;
-            //preparedSettings4Convertation.PERIOD_MONTH;
+            //_sNewDOCNUMBER = strDOCNUMBER;
 
-            string strPERIOD_TYPE;
+            //string strPERIOD_TYPE;
             switch (preparedSettings4Convertation.PERIOD_TYPE)
             {
                 case EnumPeriodOfKod.year:
-                    strPERIOD_TYPE = "";
+                    //strPERIOD_TYPE = "год";
+                    SetThisKeyNewValue("PERIOD_TYPE", "год");
                     break;
                 case EnumPeriodOfKod.semiyear:
-                    strPERIOD_TYPE = "";
+                    //strPERIOD_TYPE = "пол года";
+                    SetThisKeyNewValue("PERIOD_TYPE", "пол года");
                     break;
                 case EnumPeriodOfKod.quartal:
-                    strPERIOD_TYPE = "";
+                    //strPERIOD_TYPE = "квартал";
+                    SetThisKeyNewValue("PERIOD_TYPE", "квартал");
                     break;
                 case EnumPeriodOfKod.nine_months:
-                    strPERIOD_TYPE = "";
+                    //strPERIOD_TYPE = "9 месяцев";
+                    SetThisKeyNewValue("PERIOD_TYPE", "9 месяцев");
                     break;
                 case EnumPeriodOfKod.month:
-                    strPERIOD_TYPE = "";
+                    //strPERIOD_TYPE = "месяц";
+                    SetThisKeyNewValue("PERIOD_TYPE", "месяц");
                     break;
             }
-
-            string strPERIOD_YEAR = preparedSettings4Convertation.PERIOD_YEAR.ToString();
-
-
-            //preparedSettings4Convertation.SOFTWARE;
-            //preparedSettings4Convertation.TIN;
+            SetThisKeyAsChanged("PERIOD_TYPE", true);
 
 
-            //preparedSettings4Convertation.
+
+            SetThisKeyAsChanged("PERIOD_YEAR", true);
+            SetThisKeyNewValue("PERIOD_YEAR", preparedSettings4Convertation.PERIOD_YEAR.ToString());
+
+
+            //"TIN";
+            SetThisKeyAsChanged("TIN", true);
+            SetThisKeyNewValue("TIN", preparedSettings4Convertation.TIN);
+
+            //"C_DOC";
+            SetThisKeyAsChanged("C_DOC", true);
+            SetThisKeyNewValue("C_DOC", preparedSettings4Convertation.C_DOC);
+
+            //"C_DOC_SUB";
+            SetThisKeyAsChanged("C_DOC_SUB", true);
+            SetThisKeyNewValue("C_DOC_SUB", preparedSettings4Convertation.C_DOC_SUB);
+
+            //"C_DOC_VER";
+            SetThisKeyAsChanged("C_DOC_VER", true);
+            SetThisKeyNewValue("C_DOC_VER", preparedSettings4Convertation.C_DOC_VER);
+
+            //"C_DOC_TYPE";
+            SetThisKeyAsChanged("C_DOC_TYPE", true);
+            SetThisKeyNewValue("C_DOC_TYPE", preparedSettings4Convertation.C_DOC_TYPE);
+
+            //"C_DOC_CNT";
+            SetThisKeyAsChanged("C_DOC_CNT", true);
+            SetThisKeyNewValue("C_DOC_CNT", preparedSettings4Convertation.C_DOC_CNT);
+
+            //"C_REG";
+            SetThisKeyAsChanged("C_REG", true);
+            SetThisKeyNewValue("C_REG", preparedSettings4Convertation.C_REG);
+
+            //"C_RAJ";
+            SetThisKeyAsChanged("C_RAJ", true);
+            SetThisKeyNewValue("C_RAJ", preparedSettings4Convertation.C_RAJ);
+
+            //"C_STI_ORIG";
+            SetThisKeyAsChanged("C_STI_ORIG", true);
+            SetThisKeyNewValue("C_STI_ORIG", preparedSettings4Convertation.C_STI_ORIG);
+
+            //"C_DOC_STAN";
+            SetThisKeyAsChanged("C_DOC_STAN", true);
+            SetThisKeyNewValue("C_DOC_STAN", preparedSettings4Convertation.C_DOC_STAN);
+
+            //"LINKED_DOCS";
+            SetThisKeyAsChanged("LINKED_DOCS", true);
+            SetThisKeyNewValue("LINKED_DOCS", preparedSettings4Convertation.LINKED_DOCS);
+
+            //"D_FILL";
+            SetThisKeyAsChanged("D_FILL", true);
+            SetThisKeyNewValue("D_FILL", preparedSettings4Convertation.D_FILL);
+
+            //"SOFTWARE";
+            SetThisKeyAsChanged("SOFTWARE", true);
+            SetThisKeyNewValue("SOFTWARE", preparedSettings4Convertation.SOFTWARE);
+
+            //"HSTI";
+            SetThisKeyAsChanged("HSTI", true);
+            SetThisKeyNewValue("HSTI", preparedSettings4Convertation.HSTI);
+
+            //"HTIN";
+            SetThisKeyAsChanged("HTIN", true);
+            SetThisKeyNewValue("HTIN", preparedSettings4Convertation.HTIN);
+
+            //"HNAME";
+            SetThisKeyAsChanged("HNAME", true);
+            SetThisKeyNewValue("HNAME", preparedSettings4Convertation.HNAME);
+
+            //"HBOS";
+            SetThisKeyAsChanged("HBOS", true);
+            SetThisKeyNewValue("HBOS", preparedSettings4Convertation.HBOS);
+
+            //"HFILL";
+            SetThisKeyAsChanged("HFILL", true);
+            SetThisKeyNewValue("HFILL", preparedSettings4Convertation.HFILL);
 
 
         }
@@ -446,18 +509,18 @@ namespace TransXLS2XML
                     sArrayOfKeys[20] = "BODY.HFILL";
                     sArrayOfKeysRet = null;
                 }
-            } else
-            {
-                sArrayOfKeysRet = sArrayOfKeys;
             }
-            _propertiesOrder = sArrayOfKeys;
+
+            sArrayOfKeysRet = sArrayOfKeys;
+            //_propertiesOrder = sArrayOfKeys;
             return sArrayOfKeysRet;
         }
 
 
         private void InitializerByDefaultKeysForSectionBodyOrHeadToSeparateSet()
         {
-            foreach (var sOneProperty in _propertiesOrder)
+            string[] sArrayOfKeysRet = InitializerByDefaultKeysForSectionBodyOrHead();
+            foreach (var sOneProperty in sArrayOfKeysRet)
             {
                 var sPrefix = sOneProperty.Substring(0, sOneProperty.IndexOf('.'));
                 if (!sPrefix.Equals("TYPE"))
@@ -477,6 +540,9 @@ namespace TransXLS2XML
                         bodySet.Add(sKey);
                         _parametersTypesBodyOrHead[ConvertorPreparedLocationParams.BODY] = bodySet;
                     }
+                } else
+                {
+                    string sDOCNUMBER = sDOCNUMBER_DEFAULT_NUMBER;// _sDOCNUMBER
                 }
             }
         }

@@ -84,7 +84,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="ConvertorPreparedStructure.cs" />
+    <Compile Include="ConvertorPreparedInfo.cs" />
     <Compile Include="DialogWnd.cs" />
     <Compile Include="EnumPeriodOfKod.cs" />
     <Compile Include="INIFiles.cs" />
